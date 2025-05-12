@@ -1,5 +1,18 @@
 
 #include <stdio.h>
+
+// Questão 02:
+// Suponha a existência de um vetor de tamanho
+// TAM, cada posição armazenando o nome da
+// pessoa e a sua data de aniversário
+// (representada por um struct do tipo TData,
+// contendo os campos dia e mes). Pede-se o
+// desenvolvimento das seguintes funções:
+//  Determinar a quantidade de pessoas que
+// fazem aniversário no mês M;
+//  Exibir os nomes de todas pessoas que fazem
+// aniversário entre as datas d1 e d2, ambas
+// do tipo TData.
 typedef struct {
     int dia;
     int mes;
@@ -19,7 +32,15 @@ int funcao1(TFunc funcs[], int tamF, int mesF){
     return cont;
 }
 
-int funcao2()
+
+int funcao2(TFunc funcs[], int tamF, TData d1, TData d2){
+    int i;
+    for(i=0;i<tamF;i++){
+        if(((funcs[i].data.mes>d1.mes)||((funcs[i].data.mes==d1.mes)&& (funcs[i].data.dia>d1.dia))) && ((funcs[i].data.mes<d2.mes)||((funcs[i].data.mes==d2.mes)&& (funcs[i].data.dia<d2.dia)))){
+            printf("%s", &funcs[i].Nome);
+        }
+    }
+}
 
 int main()
 {
