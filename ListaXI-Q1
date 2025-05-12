@@ -29,6 +29,17 @@ void func2(MCarro carros[], float aumento, int tamS){
         }
     }
 }
+
+void func3(MCarro carros[], int tamS, char placa){
+    int i, j;
+    for(i=0;i<tamS;i++){
+        if(carros[i].placa==placa){
+            for(j=i;j<tamS;j++){
+                carros[i]=carros[i+1]
+            }
+        }
+    }
+}
 int main()
 {
     printf("Hello World");
