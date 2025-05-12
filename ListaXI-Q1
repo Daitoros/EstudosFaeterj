@@ -1,0 +1,37 @@
+
+#include <stdio.h>
+
+typedef struct {
+    char placa[10];
+    char modelo[10];
+    char marca[10];
+    char cor[10];
+    int km;
+    int anoFab;
+    float valor;
+    char tipo[10];
+}MCarro;
+
+void func1(MCarro carros[],int tam, char modeloM[], int a1, int a2, float xValor){
+    int i;
+    for(i=0; i<tam;i++){
+        if((carros[i].modelo==modeloM) && (carros[i].anoFab>=a1 && carros[i].anoFab<=a2) && carros[i].valor<xValor){
+            printf("%s", &carros[i].placa);
+        }
+    }
+}
+
+void func2(MCarro carros[], float aumento, int tamS){
+    int i;
+    for(i=0; i<tamS; i++){
+        if(carros[i].km==0){
+            carros[i].valor*=aumento;
+        }
+    }
+}
+int main()
+{
+    printf("Hello World");
+
+    return 0;
+}
