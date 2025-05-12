@@ -1,0 +1,40 @@
+
+#include <stdio.h>
+
+// Questão 03:
+// Considere a existência de um vetor de structs
+// com quant posições, onde cada uma destas
+// armazena os seguintes dados sobre os
+// funcionários de uma empresa: matricula (int),
+// nome (string), gênero (char) e salário (float).
+// Pede-se uma função que, dado um gênero,
+// desloque todos os funcionários deste gênero
+// para o início do vetor (e, consequentemente, os
+// funcionários do outro gênero ficarão ao final do
+// conjunto).
+
+typedef struct {
+    int matricula;
+    char genero;
+    float salario;
+    char Nome[10];
+}TFunc;
+
+void trocaG(TFunc func[], int quant){
+    int i, j;
+    char k;
+
+    for(i=0, j=quant;i<j;i++,j--){
+        if(func[i].genero== "m" && func[i].genero== "h"){
+            k=func[i].genero;
+            func[i].genero=func[j].genero;
+            func[j].genero=k;
+        }
+    }
+}
+int main()
+{
+    printf("Hello World");
+
+    return 0;
+}
