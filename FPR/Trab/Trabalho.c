@@ -23,22 +23,20 @@ typedef struct{
 
 int abrirArq(char nomeArq[], char carac){
     FILE* arq;
-    int i, num, ant = INT_MIN;
-    char linha[5];
-    
+    char c[4];
+    int i, j;
+    //ao ler o arquivo, a cada 10 leituras, iterar o struct (fazer função para checar múltiplo de 10)
+    //fazer uma variável para receber o string lido (cada linha ele entende como um string), usar a função para passar pra float e passar pro lugar certo
+    // fazer a leitura e preenchimento do struct diretamente na main
 
     arq = fopen (nomeArq, "r");
 
 
     if(arq!= NULL){
 
-
-        while(fscanf (arq, "%s", &num) != EOF)
-		{
-            if(){
-
-            }
-		}
+        for(i=0, j=0;fscanf (arq, "%s", &c) != EOF;i++){
+            
+        }
         fclose(arq);
         return 1;
     } else{
@@ -48,15 +46,16 @@ int abrirArq(char nomeArq[], char carac){
 
 
 float mCPCCont(TCursoD curso){
+    // checar se é assim mesmo que checa a média.
     float result=0;
-    result=curso.doutores;
-    result*=curso.idd;
-    result*=curso.inf;
-    result*=curso.mestres;
-    result*=curso.notaEnade;
-    result*=curso.OAAP;
-    result*=curso.orgDPed;
-    result*=curso.regDTrab;
+    result=curso.doutores*0.15;
+    result*=curso.idd*0.35;
+    result*=curso.inf*0.05;
+    result*=curso.mestres*0.075;
+    result*=curso.notaEnade*0.2;
+    result*=curso.OAAP*0.025;
+    result*=curso.orgDPed*0.075;
+    result*=curso.regDTrab*0.075;
     return result;
 }
 
@@ -86,6 +85,20 @@ int determCpcF(float mCpcC){
     }
 }
 
-void exibirCCPC(TCursoP cursos){
+void exibirCCPC(TCursoP cursos[], int num){
     //Aqui, basta criar uma função para varrer o vetor de cursos.cod, enquanto existir e, para cada posição de cpc faixa, exibir os que estão dentro.
+    int i;
+    for(i=0;cursos[i].cod;i++){
+        if(cursos[i].cpcFaixa==num){
+            printf("%d\n", cursos[i].cod);
+        }
+    }
+}
+
+int multiploDez(){
+
+}
+
+void main(){
+
 }
