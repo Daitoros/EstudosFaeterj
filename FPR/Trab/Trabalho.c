@@ -27,7 +27,7 @@ int abrirArq(char nomeArq[], char carac){
     int i, j;
     //ao ler o arquivo, a cada 10 leituras, iterar o struct (fazer função para checar múltiplo de 10)
     //fazer uma variável para receber o string lido (cada linha ele entende como um string), usar a função para passar pra float e passar pro lugar certo
-    // fazer a leitura e preenchimento do struct diretamente na main
+    // fazer a leitura e preenchimento do struct diretamente na main (ou não)
 
     arq = fopen (nomeArq, "r");
 
