@@ -22,7 +22,7 @@ typedef struct{
     char class[14];
 }TCursoP;
 
-int abrirArq(char nomeArq[], TCursoD dados[], char carac){
+int lerArq(char nomeArq[], TCursoD dados[], char carac){
     FILE* arq;
     char s[4];
     int i, j;
