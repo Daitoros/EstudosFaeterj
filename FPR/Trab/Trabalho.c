@@ -44,7 +44,7 @@ int lerArq(char nomeArq[], TCursoD dados[]){
         fclose(arq);
         return 1;
     } else{
-        return -1;
+        return 0;
     }
 }
 
@@ -128,18 +128,15 @@ int preencherTabela(int i, TCursoD cursos[], int j, char s[]){
                         return 6;
                     } else{
                         if(i%5==0){
-                            frac=atof(s);
-                            cursos[j].mestres=frac;
+                            cursos[j].mestres=atof(s);
                             return 5;
                         }else{
                             if(i%4==0){
-                                frac=atof(s);
-                                cursos[j].doutores=frac;
+                                cursos[j].doutores=atof(s);
                                 return 4;
                             } else{
                                 if(i%3==0){
-                                    frac=atof(s);
-                                    cursos[j].idd=frac;
+                                    cursos[j].idd=atof(s);
                                     return 3;
                                 } else{
                                     if(i%2==0){
@@ -167,6 +164,8 @@ TCursoD dados[100];
 printf("Informe o nome do Arquivo:");
 scanf("%s", &nomeArq);
 
-lerArq(nomeArq,dados);
+if(!lerArq(nomeArq,dados)){
+
+}
 
 }
