@@ -22,7 +22,7 @@ typedef struct{
     char class[14];
 }TCursoP;
 
-int abrirArq(char nomeArq[], char carac){
+int abrirArq(char nomeArq[], TCursoD dados[], char carac){
     FILE* arq;
     char s[4];
     int i, j;
@@ -35,8 +35,10 @@ int abrirArq(char nomeArq[], char carac){
 
     if(arq!= NULL){
 
-        for(i=0, j=0;fscanf (arq, "%s", &s) != EOF;i++){
-            
+        for(i=1, j=0;fscanf (arq, "%s", &s) != EOF;i++){
+            if(preencherTabela(i,dados,j,s)==10){
+                j++;
+            }
         }
         fclose(arq);
         return 1;
