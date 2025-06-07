@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct 
 {
@@ -161,5 +162,10 @@ int preencherTabela(int i, TCursoD cursos[], int j, char s[]){
 }
 
 void main(){
+char nomeArq[20];
+
+printf("Informe o nome do Arquivo:");
+scanf("%s", &nomeArq);
+
 
 }
