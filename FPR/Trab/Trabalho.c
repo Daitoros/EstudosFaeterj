@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct 
 {
@@ -23,7 +24,7 @@ typedef struct{
 
 int abrirArq(char nomeArq[], char carac){
     FILE* arq;
-    char c[4];
+    char s[4];
     int i, j;
     //ao ler o arquivo, a cada 10 leituras, iterar o struct (fazer função para checar múltiplo de 10)
     //fazer uma variável para receber o string lido (cada linha ele entende como um string), usar a função para passar pra float e passar pro lugar certo
@@ -34,7 +35,7 @@ int abrirArq(char nomeArq[], char carac){
 
     if(arq!= NULL){
 
-        for(i=0, j=0;fscanf (arq, "%s", &c) != EOF;i++){
+        for(i=0, j=0;fscanf (arq, "%s", &s) != EOF;i++){
             
         }
         fclose(arq);
@@ -95,8 +96,66 @@ void exibirCCPC(TCursoP cursos[], int num){
     }
 }
 
-int multiploDez(){
-
+int preencherTabela(int i, TCursoD cursos[], int j, char s[]){
+    int inteiro;
+    float frac;
+    if((i%2==0)&&(i%5==0)){
+        inteiro=atoi(s);
+        cursos[j].numAlun=inteiro;
+        return 10;
+    } else{
+        if((i%9==0)&&(i%3==0)){
+            frac=atof(s);
+            cursos[j].OAAP=frac;
+            return 9;
+        } else{
+            if((i%2==0)&&(i%4==0)){
+                frac=atof(s);
+                cursos[j].inf=frac;
+                return 8;
+            } else{
+                if(i%7==0){
+                    frac=atof(s);
+                    cursos[j].orgDPed=frac;
+                    return 7;
+                } else{
+                    if((i%2==0)&&(i%3==0)){
+                        frac=atof(s);
+                        cursos[j].regDTrab=frac;
+                        return 6;
+                    } else{
+                        if(i%5==0){
+                            frac=atof(s);
+                            cursos[j].mestres=frac;
+                            return 5;
+                        }else{
+                            if(i%4==0){
+                                frac=atof(s);
+                                cursos[j].doutores=frac;
+                                return 4;
+                            } else{
+                                if(i%3==0){
+                                    frac=atof(s);
+                                    cursos[j].idd=frac;
+                                    return 3;
+                                } else{
+                                    if(i%2==0){
+                                        frac=atof(s);
+                                        cursos[j].notaEnade=frac;
+                                        return 2;
+                                    } else{
+                                        inteiro=atoi(s);
+                                        cursos[j].cod=inteiro;
+                                        return 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 void main(){
