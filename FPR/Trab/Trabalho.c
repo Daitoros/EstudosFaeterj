@@ -23,7 +23,7 @@ typedef struct{
     char class[14];
 }TCursoP;
 
-int lerArq(char nomeArq[], TCursoD dados[], char carac){
+int lerArq(char nomeArq[], TCursoD dados[]){
     FILE* arq;
     char s[4];
     int i, j;
@@ -163,9 +163,10 @@ int preencherTabela(int i, TCursoD cursos[], int j, char s[]){
 
 void main(){
 char nomeArq[20];
-
+TCursoD dados[100];
 printf("Informe o nome do Arquivo:");
 scanf("%s", &nomeArq);
 
+lerArq(nomeArq,dados);
 
 }
