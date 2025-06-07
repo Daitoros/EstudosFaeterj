@@ -20,7 +20,7 @@ typedef struct{
     int cod;
     float MCpcCont;
     float cpcFaixa;
-    char class[14];
+    char classificacao [14];
 }TCursoP;
 
 int lerArq(char nomeArq[], TCursoD dados[]){
@@ -34,7 +34,7 @@ int lerArq(char nomeArq[], TCursoD dados[]){
     arq = fopen (nomeArq, "r");
 
 
-    if(arq!= NULL){
+    if(arq){
 
         for(i=1, j=0;fscanf (arq, "%s", &s) != EOF;i++){
             if(preencherTabela(i,dados,j,s)==10){
@@ -43,7 +43,8 @@ int lerArq(char nomeArq[], TCursoD dados[]){
         }
         fclose(arq);
         return 1;
-    } else{
+    } 
+    else {
         return -1;
     }
 }
@@ -66,19 +67,23 @@ float calcularCPCCont(TCursoD curso){
 int determCpcF(float mCpcC){
     if(mCpcC>3.945){
         return 5;
-    }else{
+    }
+    else {
         if (mCpcC>2.945)
         {
             return 4;
-        }else{
+        }
+    else {
             if (mCpcC>1.945)
             {
                 return 3;
-            }else{
+            }
+    else {
                 if (mCpcC>0.945)
                 {
                     return 2;
-                }else{
+                }
+    else {
                     return 1;
                 }
                 
@@ -113,18 +118,15 @@ int preencherTabela(int i, TCursoD cursos[], int j, char s[]){
             return 9;
         } else{
             if((i%2==0)&&(i%4==0)){
-                frac=atof(s);
-                cursos[j].inf=frac;
+                cursos[j].inf=atof(s);
                 return 8;
             } else{
                 if(i%7==0){
-                    frac=atof(s);
-                    cursos[j].orgDPed=frac;
+                    cursos[j].orgDPed=atof(s);
                     return 7;
                 } else{
                     if((i%2==0)&&(i%3==0)){
-                        frac=atof(s);
-                        cursos[j].regDTrab=frac;
+                        cursos[j].regDTrab=atof(s);
                         return 6;
                     } else{
                         if(i%5==0){
@@ -133,22 +135,18 @@ int preencherTabela(int i, TCursoD cursos[], int j, char s[]){
                             return 5;
                         }else{
                             if(i%4==0){
-                                frac=atof(s);
-                                cursos[j].doutores=frac;
+                                cursos[j].doutores=atof(s);
                                 return 4;
                             } else{
                                 if(i%3==0){
-                                    frac=atof(s);
-                                    cursos[j].idd=frac;
+                                    cursos[j].idd=atof(s);
                                     return 3;
                                 } else{
                                     if(i%2==0){
-                                        frac=atof(s);
-                                        cursos[j].notaEnade=frac;
+                                        cursos[j].notaEnade=atof(s);
                                         return 2;
                                     } else{
-                                        inteiro=atoi(s);
-                                        cursos[j].cod=inteiro;
+                                        cursos[j].cod=atoi(s);
                                         return 1;
                                     }
                                 }
