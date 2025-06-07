@@ -48,7 +48,7 @@ int abrirArq(char nomeArq[], TCursoD dados[], char carac){
 }
 
 
-float mCPCCont(TCursoD curso){
+float calcularCPCCont(TCursoD curso){
     // checar se é assim mesmo que checa a média.
     float result=0;
     result=curso.doutores*0.15;
@@ -88,7 +88,7 @@ int determCpcF(float mCpcC){
     }
 }
 
-void exibirCCPC(TCursoP cursos[], int num){
+void exibirCursosCPCF(TCursoP cursos[], int num){
     //Aqui, basta criar uma função para varrer o vetor de cursos.cod, enquanto existir e, para cada posição de cpc faixa, exibir os que estão dentro.
     int i;
     for(i=0;cursos[i].cod;i++){
