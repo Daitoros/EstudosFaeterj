@@ -131,11 +131,30 @@ int preencherTabela(int i, TCursoD cursos[], int j, char s[]){
     }
 }
 
+int tamStruct(char nomeArq[]){
+    FILE* arq;
+    char s[4];
+    int i=0;
+
+    arq = fopen (nomeArq, "r");
+
+
+    if(arq){
+
+        while(fscanf (arq, "%s", &s) != EOF){
+            i++;
+        }
+        fclose(arq);
+        return i;
+    } else{
+        return 0;
+    }
+}
 
 int lerArq(char nomeArq[], TCursoD dados[]){
     FILE* arq;
     char s[4];
-    int i, j;
+    int i=1, j=0;
     //ao ler o arquivo, a cada 10 leituras, iterar o struct (fazer função para checar múltiplo de 10)
     //fazer uma variável para receber o string lido (cada linha ele entende como um string), usar a função para passar pra float e passar pro lugar certo
     // fazer a leitura e preenchimento do struct diretamente na main (ou não)
@@ -145,13 +164,15 @@ int lerArq(char nomeArq[], TCursoD dados[]){
 
     if(arq){
 
-        for(i=1, j=0;fscanf (arq, "%s", &s) != EOF;i++){
+        while(fscanf (arq, "%s", &s) != EOF){
             if(preencherTabela(i,dados,j,s)==10){
                 j++;
+            } else{
+                i++;
             }
         }
         fclose(arq);
-        return 1;
+        return i;
     } else{
         return 0;
     }
@@ -189,15 +210,37 @@ result/=div;
 return result;
 }
 
+void incluir_curso(TCursoD dados[], char nomeArq[], int totalCursos) {
+    dados[totalCursos+1]
+
+    if (totalCursos >= MAX_CURSOS) {
+        printf("Limite máximo de cursos atingido.\n");
+        return -1;
+    }
+    printf("Código do curso: ");
+    scanf("%s", cursos[totalCursos].codigo);
+
+    printf("CPC contínuo: ");
+    scanf("%f", &cursos[totalCursos].cpc);
+
+    printf("Número de alunos matriculados: ");
+    scanf("%d", &cursos[totalCursos].alunos);
+
+    totalCursos++;
+    printf("Curso incluído com sucesso!\n");
+}
+
 void main(){
 char nomeArq[20];
-TCursoD dados[100];
-TCursoP dadosProc[100];
-int cUser;
+
+int cUser, totalCursos;
 printf("Informe o nome do Arquivo:");
 scanf("%s", &nomeArq);
-
-if(!lerArq(nomeArq,dados)){
+int tStruct=tamStruct(nomeArq);
+TCursoD dados[tStruct];
+TCursoP dadosProc[tStruct];
+totalCursos=lerArq(nomeArq,dados);
+if(!totalCursos){
     printf("Não foi possível abrir o arquivo!");
 } else{
     printf("Pressione 0 parra terminar o programa, 1 para adicionar um novo curso ou 2 para processar os dados");
