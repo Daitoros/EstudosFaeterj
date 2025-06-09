@@ -82,8 +82,6 @@ void exibirCursosCPCF(TCursoP cursos[]){
 }
 
 int preencherTabela(int i, TCursoD cursos[], int j, char s[]){
-    int inteiro;
-    float frac;
     if((i%2==0)&&(i%5==0)){
         cursos[j].numAlun=atoi(s);
         return 10;
