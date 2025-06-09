@@ -85,13 +85,11 @@ int preencherTabela(int i, TCursoD cursos[], int j, char s[]){
     int inteiro;
     float frac;
     if((i%2==0)&&(i%5==0)){
-        inteiro=atoi(s);
-        cursos[j].numAlun=inteiro;
+        cursos[j].numAlun=atoi(s);
         return 10;
     } else{
         if((i%9==0)&&(i%3==0)){
-            frac=atof(s);
-            cursos[j].OAAP=frac;
+            cursos[j].OAAP=atof(s);
             return 9;
         } else{
             if((i%2==0)&&(i%4==0)){
