@@ -68,11 +68,11 @@ int determCpcF(float mCpcC){
     }
 }
 
-void exibirCursosCPCF(TCursoP cursos[]){
+void exibirCursosCPCF(TCursoP cursos[], int tamV){
     //Aqui, basta criar uma função para varrer o vetor de cursos.cod, enquanto existir e, para cada posição de cpc faixa, exibir os que estão dentro.
     int i, num;
     for(num=1;num<6;num++){
-        for(i=0;cursos[i].cod;i++){
+        for(i=0;i<tamV;i++){
             if(cursos[i].cpcFaixa==num){
                 printf("%d\n", cursos[i].cod);
             }
@@ -131,26 +131,6 @@ int preencherTabela(int i, TCursoD cursos[], int j, char s[]){
     }
 }
 
-int tamStruct(char nomeArq[]){
-    FILE* arq;
-    char s[4];
-    int i=0;
-
-    arq = fopen (nomeArq, "r");
-
-
-    if(arq){
-
-        while(fscanf (arq, "%s", &s) != EOF){
-            i++;
-        }
-        fclose(arq);
-        return i;
-    } else{
-        return 0;
-    }
-}
-
 int lerArq(char nomeArq[], TCursoD dados[]){
     FILE* arq;
     char s[4];
@@ -178,9 +158,9 @@ int lerArq(char nomeArq[], TCursoD dados[]){
     }
 }
 
-void orgDados(TCursoD dados[], TCursoP dadosP[]){
+void orgDados(TCursoD dados[], TCursoP dadosP[], int tamV){
     int i;
-    for(i=0;dados[i].cod;i++){
+    for(i=0;i<tamV;i++){
         dadosP[i].cod=dados[i].cod;
         dadosP[i].MCpcCont=calcularCPCCont(dados[i]);
         dadosP[i].cpcFaixa=determCpcF(dadosP[i].MCpcCont);
@@ -192,17 +172,17 @@ void orgDados(TCursoD dados[], TCursoP dadosP[]){
     }
 }
 
-void exibDados(TCursoP dados[]){
+void exibDados(TCursoP dados[], int tamV){
     int i;
-    for(i=0;dados[i].cod;i++){
+    for(i=0;i<tamV;i++){
         printf("\n Curso %d:\n Código: %d\n CPC Contínuo: %f\n CPC Faixa: %f\n Classificação: %s", i, dados[i].cod, dados[i].MCpcCont, dados[i].cpcFaixa, dados[i].classificacao);
     }
 }
 
-float igcInst(TCursoD dados[], TCursoP dadosP[]){
+float igcInst(TCursoD dados[], TCursoP dadosP[], int tamV){
 int i;
 float result=0, div=0;
-for(i=0;dados[i].cod;i++){
+for(i=0;i<tamV;i++){
     result+=dadosP[i].MCpcCont*dados[i].numAlun;
     div+=dados[i].numAlun;
 }
@@ -210,68 +190,63 @@ result/=div;
 return result;
 }
 
-void incluir_curso(TCursoD dados[], char nomeArq[], int totalCursos) {
-    dados[totalCursos+1]
-
-    if (totalCursos >= MAX_CURSOS) {
-        printf("Limite máximo de cursos atingido.\n");
-        return -1;
-    }
-    printf("Código do curso: ");
-    scanf("%s", cursos[totalCursos].codigo);
-
-    printf("CPC contínuo: ");
-    scanf("%f", &cursos[totalCursos].cpc);
-
-    printf("Número de alunos matriculados: ");
-    scanf("%d", &cursos[totalCursos].alunos);
-
-    totalCursos++;
-    printf("Curso incluído com sucesso!\n");
+// void incluir_curso(TCursoD dados[], char nomeArq[], int totalCursos) {
+//     dados[totalCursos+1]
+//     if (totalCursos >= MAX_CURSOS) {
+//         printf("Limite máximo de cursos atingido.\n");
+//         return -1;
+//     }
+//     printf("Código do curso: ");
+//     scanf("%s", cursos[totalCursos].codigo);
+//     printf("CPC contínuo: ");
+//     scanf("%f", &cursos[totalCursos].cpc);
+//     printf("Número de alunos matriculados: ");
+//     scanf("%d", &cursos[totalCursos].alunos);
+//     totalCursos++;
+//     printf("Curso incluído com sucesso!\n");
+// }
+int incluirCurso(TCursoD dados[], int tamV){
+    printf("Informe o ")
 }
-
 void main(){
-char nomeArq[20];
-
-int cUser, totalCursos;
-printf("Informe o nome do Arquivo:");
-scanf("%s", &nomeArq);
-int tStruct=tamStruct(nomeArq);
-TCursoD dados[tStruct];
-TCursoP dadosProc[tStruct];
-totalCursos=lerArq(nomeArq,dados);
-if(!totalCursos){
-    printf("Não foi possível abrir o arquivo!");
-} else{
-    printf("Pressione 0 parra terminar o programa, 1 para adicionar um novo curso ou 2 para processar os dados");
-    scanf("%d", &cUser);
-    if(cUser){
-        orgDados(dados, dadosProc);
-        printf("Pressione 1 para exibir os dados processados de cada curso, 2 para exibir os cursos em relação ao CPC Faixa e 3 para exibir o IGC da Instituição:");
-        scanf("%d", &cUser);
-        if(cUser==1){
-            exibDados(dadosProc);
-        } else{
-            if(cUser==2){
-                exibirCursosCPCF(dadosProc);
-            } else{
-                igcInst(dados, dadosProc);
-            }
-        }
+    char nomeArq[20];
+    TCursoD dados[100];
+    TCursoP dadosProc[100];
+    int cUser, totalCursos;
+    printf("Informe o nome do Arquivo:");
+    scanf("%s", &nomeArq);
+    int Cursos=lerArq(nomeArq,dados);
+    if(!Cursos){
+        printf("Não foi possível abrir o arquivo!");
     } else{
-
-    }
-}
-
-//tentando implementar uma recursiva a seguir:
-int comandUser(int comand){
-    if(comand){
-        if(comand==1){
-            exibDados(dadosProc);
+        printf("Pressione 0 parra terminar o programa, 1 para adicionar um novo curso ou 2 para processar os dados");
+        scanf("%d", &cUser);
+        if(cUser){
+            orgDados(dados, dadosProc, Cursos);
+            printf("Pressione 1 para exibir os dados processados de cada curso, 2 para exibir os cursos em relação ao CPC Faixa e 3 para exibir o IGC da Instituição:");
+            scanf("%d", &cUser);
+            if(cUser==1){
+                exibDados(dadosProc, Cursos);
+            } else{
+                if(cUser==2){
+                    exibirCursosCPCF(dadosProc, Cursos);
+                } else{
+                    igcInst(dados, dadosProc, Cursos);
+                }
+            }
+        } else{
 
         }
-    } else {
-        printf("Encerrando o programa...");
-        return 0;
     }
-}
+
+// //tentando implementar uma recursiva a seguir:
+// int comandUser(int comand, TCursoD dados[], TCursoP dadosP[]){
+//     if(comand){
+//         if(comand==1){
+//             exibDados(dadosP);
+//         }
+//     } else {
+//         printf("Encerrando o programa...");
+//         return 0;
+//     }
+// }
