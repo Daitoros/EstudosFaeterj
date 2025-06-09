@@ -43,15 +43,8 @@ int lerArq(char nomeArq[], TCursoD dados[]){
         }
         fclose(arq);
         return 1;
-<<<<<<< HEAD
     } else{
         return 0;
-=======
-    } 
-    else {
-        return -1;
->>>>>>> 154ded82b7015b9be25d32eba2ec4ac43ffb96d5
-    }
 }
 
 
@@ -73,29 +66,30 @@ int determCpcF(float mCpcC){
     if(mCpcC>3.945){
         return 5;
     }
-    else {
+    else 
+    {
         if (mCpcC>2.945)
         {
             return 4;
         }
-    else {
+        else 
+        {
             if (mCpcC>1.945)
             {
                 return 3;
             }
-    else {
+            else
+            {
                 if (mCpcC>0.945)
                 {
                     return 2;
                 }
-    else {
+                else
+                {
                     return 1;
                 }
-                
             }
-            
         }
-        
     }
 }
 
