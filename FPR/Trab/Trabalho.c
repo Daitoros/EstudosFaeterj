@@ -183,7 +183,14 @@ void exibDados(TCursoP dados[]){
 }
 
 float igcInst(TCursoD dados[], TCursoP dadosP[]){
-
+int i;
+float result=0, div=0;
+for(i=0;dados[i].cod;i++){
+    result+=dadosP[i].MCpcCont*dados[i].numAlun;
+    div+=dados[i].numAlun;
+}
+result/=div;
+return result;
 }
 
 void main(){
@@ -209,7 +216,7 @@ if(!lerArq(nomeArq,dados)){
             if(cUser==2){
                 exibirCursosCPCF(dadosProc);
             } else{
-
+                igcInst(dados, dadosProc);
             }
         }
     } else{
