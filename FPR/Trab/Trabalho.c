@@ -73,6 +73,7 @@ void exibirCursosCPCF(TCursoP cursos[], int tamV){
     int i, num;
     for(num=1;num<6;num++){
         for(i=0;i<tamV;i++){
+            printf("\nCursos com CPC Faixa %d: \n", num);
             if(cursos[i].cpcFaixa==num){
                 printf("%d\n", cursos[i].cod);
             }
