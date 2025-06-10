@@ -152,7 +152,7 @@ int lerArq(char nomeArq[], TCursoD dados[]){
             }
         }
         fclose(arq);
-        return i;
+        return j;
     } else{
         return 0;
     }
@@ -205,17 +205,75 @@ return result;
 //     totalCursos++;
 //     printf("Curso incluído com sucesso!\n");
 // }
-int incluirCurso(TCursoD dados[], int tamV){
-    printf("Informe o ")
+int incluirCurso(TCursoD dados[], int *tamV){
+    if(tamV==99){
+        printf("Limite de Cursos atingido!");
+        return 0;
+    } else{
+    printf("\nCódigo do curso: ");
+    scanf("%s", &dados[*tamV+1].cod);
+    printf("\nNota do Enade: ");
+    scanf("%f", &dados[*tamV+1].notaEnade);
+    printf("\nNota do IDD: ");
+    scanf("%f", &dados[*tamV+1].idd);
+    printf("\nNota dos Doutores: ");
+    scanf("%f", &dados[*tamV+1].doutores);
+    printf("\nNota dos Mestres: ");
+    scanf("%f", &dados[*tamV+1].mestres);
+    printf("\nNota do Regime de Trabalho: ");
+    scanf("%f", &dados[*tamV+1].regDTrab);
+    printf("\nNota da Organização Didático-Pedagógica: ");
+    scanf("%f", &dados[*tamV+1].orgDPed);
+    printf("\nNota da Infraestrutura: ");
+    scanf("%f", &dados[*tamV+1].inf);
+    printf("\nNota das Oportunidades de Ampliação Acadêmico-social: ");
+    scanf("%f", &dados[*tamV+1].OAAP);
+    printf("\nNúmero de alunos matriculados: ");
+    scanf("%d", &dados[*tamV+1].numAlun);
+    printf("\n\nCurso incluído com sucesso!\n");
+    *tamV++;
+    return 1;
+    }
+}
+
+void gravarArq(TCursoD dados[], char nomeArq[], int tamV){
+    FILE* arq;
+    int i;
+
+    arq = fopen (nomeArq, "w");
+
+
+    if (arq)
+    {	
+		for (i=0;i<tamV;i++)
+		{
+			fprintf (arq, "%d\n", dados[i].cod);
+            fprintf (arq, "%f\n", dados[i].notaEnade);
+            fprintf (arq, "%f\n", dados[i].idd);
+            fprintf (arq, "%f\n", dados[i].doutores);
+            fprintf (arq, "%f\n", dados[i].mestres);
+            fprintf (arq, "%f\n", dados[i].regDTrab);
+            fprintf (arq, "%f\n", dados[i].orgDPed);
+            fprintf (arq, "%f\n", dados[i].inf);
+            fprintf (arq, "%f\n", dados[i].OAAP);
+            fprintf (arq, "%d\n", dados[i].numAlun);
+		}
+
+        printf ("Gravação feita com sucesso!");
+		fclose (arq);
+	}
+	else
+	{
+		printf ("\n\nErro na abertura do arquivo!");
+	}
 }
 void main(){
     char nomeArq[20];
     TCursoD dados[100];
     TCursoP dadosProc[100];
-    int cUser, totalCursos;
     printf("Informe o nome do Arquivo:");
     scanf("%s", &nomeArq);
-    int Cursos=lerArq(nomeArq,dados);
+    int cUser, Cursos=lerArq(nomeArq,dados);
     if(!Cursos){
         printf("Não foi possível abrir o arquivo!");
     } else{
@@ -235,7 +293,9 @@ void main(){
                 }
             }
         } else{
-
+            if(incluirCurso){
+                gravarArq(dados,nomeArq,Cursos);
+            }
         }
     }
 
