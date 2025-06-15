@@ -18,7 +18,7 @@ typedef struct {
 typedef struct{
     int cod;
     float MCpcCont;
-    float cpcFaixa;
+    int cpcFaixa;
     char classificacao[14];
 }TCursoP;
 
@@ -69,11 +69,10 @@ int determCpcF(float mCpcC){
 }
 
 void exibirCursosCPCF(TCursoP cursos[], int tamV){
-    //Aqui, basta criar uma função para varrer o vetor de cursos.cod, enquanto existir e, para cada posição de cpc faixa, exibir os que estão dentro.
     int i, num;
     for(num=1;num<6;num++){
+        printf("\nCursos com CPC Faixa %d: \n", num);
         for(i=0;i<tamV;i++){
-            printf("\nCursos com CPC Faixa %d: \n", num);
             if(cursos[i].cpcFaixa==num){
                 printf("%d\n", cursos[i].cod);
             }
@@ -134,11 +133,8 @@ int preencherTabela(int i, TCursoD cursos[], int j, char s[]){
 
 int lerArq(char nomeArq[], TCursoD dados[]){
     FILE* arq;
-    char s[4];
+    char s[5];
     int i=1, j=0;
-    //ao ler o arquivo, a cada 10 leituras, iterar o struct (fazer função para checar múltiplo de 10)
-    //fazer uma variável para receber o string lido (cada linha ele entende como um string), usar a função para passar pra float e passar pro lugar certo
-    // fazer a leitura e preenchimento do struct diretamente na main (ou não)
 
     arq = fopen (nomeArq, "r");
 
@@ -176,7 +172,7 @@ void orgDados(TCursoD dados[], TCursoP dadosP[], int tamV){
 void exibDados(TCursoP dados[], int tamV){
     int i;
     for(i=0;i<tamV;i++){
-        printf("\n Curso %d:\n Código: %d\n CPC Contínuo: %f\n CPC Faixa: %f\n Classificação: %s", i, dados[i].cod, dados[i].MCpcCont, dados[i].cpcFaixa, dados[i].classificacao);
+        printf("\n Curso %d:\n Código: %d\n CPC Contínuo: %f\n CPC Faixa: %d\n Classificação: %s", i, dados[i].cod, dados[i].MCpcCont, dados[i].cpcFaixa, dados[i].classificacao);
     }
 }
 
@@ -191,46 +187,31 @@ result/=div;
 return result;
 }
 
-// void incluir_curso(TCursoD dados[], char nomeArq[], int totalCursos) {
-//     dados[totalCursos+1]
-//     if (totalCursos >= MAX_CURSOS) {
-//         printf("Limite máximo de cursos atingido.\n");
-//         return -1;
-//     }
-//     printf("Código do curso: ");
-//     scanf("%s", cursos[totalCursos].codigo);
-//     printf("CPC contínuo: ");
-//     scanf("%f", &cursos[totalCursos].cpc);
-//     printf("Número de alunos matriculados: ");
-//     scanf("%d", &cursos[totalCursos].alunos);
-//     totalCursos++;
-//     printf("Curso incluído com sucesso!\n");
-// }
 int incluirCurso(TCursoD dados[], int *tamV){
     if(tamV==99){
         printf("Limite de Cursos atingido!");
         return 0;
     } else{
     printf("\nCódigo do curso: ");
-    scanf("%s", &dados[*tamV+1].cod);
+    scanf("%d", &dados[*tamV].cod);
     printf("\nNota do Enade: ");
-    scanf("%f", &dados[*tamV+1].notaEnade);
+    scanf("%f", &dados[*tamV].notaEnade);
     printf("\nNota do IDD: ");
-    scanf("%f", &dados[*tamV+1].idd);
+    scanf("%f", &dados[*tamV].idd);
     printf("\nNota dos Doutores: ");
-    scanf("%f", &dados[*tamV+1].doutores);
+    scanf("%f", &dados[*tamV].doutores);
     printf("\nNota dos Mestres: ");
-    scanf("%f", &dados[*tamV+1].mestres);
+    scanf("%f", &dados[*tamV].mestres);
     printf("\nNota do Regime de Trabalho: ");
-    scanf("%f", &dados[*tamV+1].regDTrab);
+    scanf("%f", &dados[*tamV].regDTrab);
     printf("\nNota da Organização Didático-Pedagógica: ");
-    scanf("%f", &dados[*tamV+1].orgDPed);
+    scanf("%f", &dados[*tamV].orgDPed);
     printf("\nNota da Infraestrutura: ");
-    scanf("%f", &dados[*tamV+1].inf);
+    scanf("%f", &dados[*tamV].inf);
     printf("\nNota das Oportunidades de Ampliação Acadêmico-social: ");
-    scanf("%f", &dados[*tamV+1].OAAP);
+    scanf("%f", &dados[*tamV].OAAP);
     printf("\nNúmero de alunos matriculados: ");
-    scanf("%d", &dados[*tamV+1].numAlun);
+    scanf("%d", &dados[*tamV].numAlun);
     printf("\n\nCurso incluído com sucesso!\n");
     *tamV++;
     return 1;
@@ -290,11 +271,11 @@ void main(){
                 if(cUser==2){
                     exibirCursosCPCF(dadosProc, Cursos);
                 } else{
-                    igcInst(dados, dadosProc, Cursos);
+                    printf("O Índice Geral de Cursos da Intituição é %f!", igcInst(dados, dadosProc, Cursos));
                 }
             }
         } else{
-            if(incluirCurso){
+            if(incluirCurso(dados, &Cursos)){
                 gravarArq(dados,nomeArq,Cursos);
             }
         }
