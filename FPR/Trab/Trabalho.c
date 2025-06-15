@@ -141,7 +141,7 @@ int lerArq(char nomeArq[], TCursoD dados[]){
 
     if(arq){
 
-        while(fscanf (arq, "%s", &s) != EOF){
+        while(fscanf (arq, "%s", s) != EOF){
             if(preencherTabela(i,dados,j,s)==10){
                 j++;
             } else{
@@ -188,7 +188,7 @@ return result;
 }
 
 int incluirCurso(TCursoD dados[], int *tamV){
-    if(tamV==99){
+    if(*tamV==99){
         printf("Limite de Cursos atingido!");
         return 0;
     } else{
@@ -213,7 +213,7 @@ int incluirCurso(TCursoD dados[], int *tamV){
     printf("\nNúmero de alunos matriculados: ");
     scanf("%d", &dados[*tamV].numAlun);
     printf("\n\nCurso incluído com sucesso!\n");
-    *tamV++;
+    (*tamV)++;
     return 1;
     }
 }
@@ -246,49 +246,99 @@ void gravarArq(TCursoD dados[], char nomeArq[], int tamV){
 	}
 	else
 	{
-		printf ("\n\nErro na abertura do arquivo!");
+		printf ("\n\nErro na abertura do arquivo ao tentar fazer a gravação!");
 	}
 }
+//Main correta, mas direta
+// void main(){
+//     char nomeArq[20];
+//     TCursoD dados[100];
+//     TCursoP dadosProc[100];
+//     printf("Informe o nome do Arquivo:");
+//     scanf("%s", nomeArq);
+//     int cUser, Cursos=lerArq(nomeArq,dados);
+//     if(!Cursos){
+//         printf("Não foi possível abrir o arquivo!");
+//     } else{
+//         printf("Pressione 0 parra terminar o programa, 1 para adicionar um novo curso ou 2 para processar os dados");
+//         scanf("%d", &cUser);
+//         if(cUser){
+//             orgDados(dados, dadosProc, Cursos);
+//             printf("Pressione 1 para exibir os dados processados de cada curso, 2 para exibir os cursos em relação ao CPC Faixa e 3 para exibir o IGC da Instituição:");
+//             scanf("%d", &cUser);
+//             if(cUser==1){
+//                 exibDados(dadosProc, Cursos);
+//             } else{
+//                 if(cUser==2){
+//                     exibirCursosCPCF(dadosProc, Cursos);
+//                 } else{
+//                     printf("O Índice Geral de Cursos da Intituição é %f!", igcInst(dados, dadosProc, Cursos));
+//                 }
+//             }
+//         } else{
+//             if(incluirCurso(dados, &Cursos)){
+//                 gravarArq(dados,nomeArq,Cursos);
+//             }
+//         }
+//     }
+
+
+void processamento(int cUser, TCursoP dadosProc[], int Cursos, TCursoD dados[]){
+    printf("Pressione 0 para encerrar o processamento, 1 para exibir os dados processados de cada curso, 2 para exibir os cursos em relação ao CPC Faixa e 3 para exibir o IGC da Instituição:");
+    scanf("%d", &cUser);
+    switch (cUser)
+    {
+    case 1:
+        exibDados(dadosProc, Cursos);
+        processamento(cUser, dadosProc, Cursos, dados);
+        break;
+    
+    case 2:
+        exibirCursosCPCF(dadosProc, Cursos);
+        processamento(cUser, dadosProc, Cursos, dados);
+        break;
+    case 3:
+        printf("O Índice Geral de Cursos da Intituição é %f!", igcInst(dados, dadosProc, Cursos));
+        processamento(cUser, dadosProc, Cursos, dados);
+        break;
+    default:
+        break;
+    }
+}
+
+void menuPrincipal(TCursoD dados[], TCursoP dadosProc[], char nomeArq[], int Cursos){
+    int cUser;
+    printf("Informe 0 para encerrar o programa, 1 para incluir um novo curso e 2 para processar dados:");
+    scanf("%d", &cUser);
+    if(cUser){
+        if(cUser==1){
+            if(incluirCurso(dados, &Cursos)){
+                gravarArq(dados,nomeArq,Cursos);
+            }
+            menuPrincipal(dados, dadosProc, nomeArq, Cursos);
+        } else{
+            orgDados(dados, dadosProc, Cursos);
+            processamento(cUser,dadosProc, Cursos, dados);
+            menuPrincipal(dados, dadosProc, nomeArq, Cursos);
+        }
+    } else{
+        return;
+    }
+}
+            
 void main(){
     char nomeArq[20];
     TCursoD dados[100];
     TCursoP dadosProc[100];
+    int Cursos;
     printf("Informe o nome do Arquivo:");
-    scanf("%s", &nomeArq);
-    int cUser, Cursos=lerArq(nomeArq,dados);
-    if(!Cursos){
-        printf("Não foi possível abrir o arquivo!");
+    scanf("%s", nomeArq);
+    Cursos=lerArq(nomeArq,dados);
+
+    if(Cursos){
+        menuPrincipal(dados, dadosProc, nomeArq, Cursos);
     } else{
-        printf("Pressione 0 parra terminar o programa, 1 para adicionar um novo curso ou 2 para processar os dados");
-        scanf("%d", &cUser);
-        if(cUser){
-            orgDados(dados, dadosProc, Cursos);
-            printf("Pressione 1 para exibir os dados processados de cada curso, 2 para exibir os cursos em relação ao CPC Faixa e 3 para exibir o IGC da Instituição:");
-            scanf("%d", &cUser);
-            if(cUser==1){
-                exibDados(dadosProc, Cursos);
-            } else{
-                if(cUser==2){
-                    exibirCursosCPCF(dadosProc, Cursos);
-                } else{
-                    printf("O Índice Geral de Cursos da Intituição é %f!", igcInst(dados, dadosProc, Cursos));
-                }
-            }
-        } else{
-            if(incluirCurso(dados, &Cursos)){
-                gravarArq(dados,nomeArq,Cursos);
-            }
-        }
+        printf("Não foi possível abrir o arquivo!");
     }
 
-// //tentando implementar uma recursiva a seguir:
-// int comandUser(int comand, TCursoD dados[], TCursoP dadosP[]){
-//     if(comand){
-//         if(comand==1){
-//             exibDados(dadosP);
-//         }
-//     } else {
-//         printf("Encerrando o programa...");
-//         return 0;
-//     }
-// }
+}           
