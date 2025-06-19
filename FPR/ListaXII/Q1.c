@@ -8,15 +8,15 @@
 int caracArq(char nomeArq[]){
     FILE* arq;
     int cont=0;
-
+    char c;
     arq = fopen (nomeArq, "r");
 
-    if(arq!= NULL){
-        while (fscanf (arq, "%c", cont++) != EOF)  //end of file
+    if(arq){
+        for(cont=0; (fscanf (arq, "%c", &c) != EOF);cont++);   //end of file
         fclose(arq);
         return cont;
     } else{
-        return 0;
+        return -1;
     }
 }
 
