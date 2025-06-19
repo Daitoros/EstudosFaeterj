@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <ctype.h>
 
-// Questão 02:
+// Questão 03:
 // Desenvolver uma função que, dado um arquivo
-// texto, verifique o número de vezes que um
-// determinado caracter aparece no arquivo.
+// texto, verifique o número de letras existentes
+// no mesmo (entendendo que no arquivo podem
+// existir letras, algarismos e símbolos).
 
 int caracArq(char nomeArq[], char carac){
     FILE* arq;
@@ -14,7 +16,8 @@ int caracArq(char nomeArq[], char carac){
 
     if(arq){
         while (fscanf (arq, "%c", &c) != EOF){
-            if(c==carac){
+            c=toupper(c);
+            if(c>100 && c<133){
                 cont++;
             }
         }  //end of file
