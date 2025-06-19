@@ -12,9 +12,7 @@ int ordenado(char nomeArq[], char carac){
 
     arq = fopen (nomeArq, "r");
 
-    if(arq!= NULL){
-
-
+    if(arq){
         for (i=0;fscanf (arq, "%d", &num) != EOF;i++)
 		{
             if(ant>num){
