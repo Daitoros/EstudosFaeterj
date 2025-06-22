@@ -28,8 +28,9 @@ int contArq(char nomeArq[]){
 
 void ordenarVetFDec(float vet[], int tamVet){
     int i, j, iM;
-    float maior=FLT_MIN, num;
+    float num;
     for(i=0;i<tamVet; i++){
+        float maior=FLT_MIN;
         for(j=i;j<tamVet;j++){
             num=vet[j];
             if(num>maior){

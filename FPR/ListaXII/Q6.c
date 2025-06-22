@@ -2,13 +2,36 @@
 #include <limits.h>
 #include <float.h>
 
-// Questão 05:
-// Faça uma função que, dado um arquivo A
-// contendo números reais, um por linha, crie um
-// novo arquivo B contendo os mesmos
-// elementos de A, porém ordenados
-// decrescentemente e sem repetição.
+// Questão 06:
+// Desenvolver uma função que, dados dois
+// arquivos textos arqA e arqB, crie um novo
+// arquivo arqC, considerando que:
+//  arqA e arqB contém números reais,
+// um por linha, ordenados
+// crescentemente e sem repetição no
+// arquivo;
+//  arqC deve conter todos os números
+// dos dois arquivos originais;
+//  Assim como arqA e arqB, arqC
+// também não possuirá repetições de elementos e estes deverão estar
+// ordenados de forma crescente.
 
+void ordenarVetFCrec(float vet[], int tamVet){
+    int i, j, iM;
+    float num;
+    for(i=0;i<tamVet; i++){
+        float menor=FLT_MAX;
+        for(j=i;j<tamVet;j++){
+            num=vet[j];
+            if(num<menor){
+                menor=num;
+                iM=j;
+            }
+        }
+        vet[iM]=vet[i];
+        vet[i]=menor;
+    }
+}
 
 int contArq(char nomeArq[]){
     FILE *arq;
@@ -26,49 +49,43 @@ int contArq(char nomeArq[]){
     }
 }
 
-void ordenarVetFDec(float vet[], int tamVet){
-    int i, j, iM;
-    float maior=FLT_MIN, num;
-    for(i=0;i<tamVet; i++){
-        for(j=i;j<tamVet;j++){
-            num=vet[j];
-            if(num>maior){
-                maior=num;
-                iM=j;
-            }
-        }
-        vet[iM]=vet[i];
-        vet[i]=maior;
-    }
-}
+int criarArqC(char nomeArqA[], char nomeArqB[]){
+    int tamA = contArq(nomeArqA), tamB = contArq(nomeArqB), i, tamT=tamA+tamB;
+    float vetorT[tamT], num;
+    FILE *arqA, *arqB, *arqC;
 
-int criarDec(char nomeArqA[]){
-    FILE *arqA, *arqB;
-    int tamVet=contArq(nomeArqA), i;
-    float maior=FLT_MAX, num, vet[tamVet];
-
-    arqA = fopen (nomeArqA, "r");
-    arqB = fopen ("arqB.txt", "w");
+    arqA= fopen (nomeArqA, "r");
+    arqB= fopen (nomeArqB, "r");
 
     if(arqA&&arqB){
-        for(i=0; fscanf(arqA, "%f", &num) != EOF ;i++) 
+        for(i=0;fscanf(arqA, "%f", &num) != EOF ; i++){
+            vetorT[i]=num;
+        }
+        while (fscanf(arqB, "%f", &num) != EOF )
         {
-            vet[i]=num;
+            vetorT[i]=num;
+            i++;
         }
-        ordenarVetFDec(vet, tamVet);
-
-        for(i=0; i<tamVet; i++){
-            fprintf(arqB, "%f", vet[i]);
-        }
-        fclose(arqA);
-        fclose(arqB);
-
-        return 1;
     } else{
-        printf("Não foi possível abrir o arquivo!");
+        printf("Não foi possível abrir o(s) arquivo(s)!");
         fclose(arqA);
         fclose(arqB);
         return 0;
     }
+    fclose(arqA);
+    fclose(arqB);
+    ordenarVetFCrec(vetorT, tamT);
+    arqC=fopen("ArqC.txt", "w");
 
+    if(arqC){
+        for(i=0;i<tamT;i++){
+            fprintf(arqC, "%f", vetorT[i]);
+        }
+        printf("Arquivo criado com sucesso!");
+        fclose(arqC);
+    } else{
+        printf("Não foi possível criar o arquivo!");
+        return 0;
+    }
+    return 1;
 }
