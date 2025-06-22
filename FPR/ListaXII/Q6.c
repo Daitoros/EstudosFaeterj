@@ -48,14 +48,29 @@ int contArq(char nomeArq[]){
         return -1;
     }
 }
-
+int acharIgual(float func[], float num, int tam){
+    int i;
+    for(i=0;i<tam;i++){
+        if(func[i]==num){
+            return 1;
+        }
+    }
+    return 0;
+}
 int criarArqC(char nomeArqA[], char nomeArqB[]){
-    int tamA = contArq(nomeArqA), tamB = contArq(nomeArqB), i, tamT=tamA+tamB;
-    float vetorT[tamT], num;
+    int tamA = contArq(nomeArqA), tamB = contArq(nomeArqB), i;
+    float num;
     FILE *arqA, *arqB, *arqC;
 
     arqA= fopen (nomeArqA, "r");
     arqB= fopen (nomeArqB, "r");
+
+    float *vetorT = (float *)malloc(sizeof(float) * (tamA + tamB));
+
+    if (vetorT == NULL) {
+        printf("Erro: Falha na alocação de memória para vetorT.\n");
+        return 0; // Falha
+    }
 
     if(arqA&&arqB){
         for(i=0;fscanf(arqA, "%f", &num) != EOF ; i++){
@@ -63,8 +78,10 @@ int criarArqC(char nomeArqA[], char nomeArqB[]){
         }
         while (fscanf(arqB, "%f", &num) != EOF )
         {
-            vetorT[i]=num;
-            i++;
+            if(acharIgual(vetorT,num,i)==0){
+                vetorT[i]=num;
+                i++;
+            }
         }
     } else{
         printf("Não foi possível abrir o(s) arquivo(s)!");
@@ -72,6 +89,7 @@ int criarArqC(char nomeArqA[], char nomeArqB[]){
         fclose(arqB);
         return 0;
     }
+    int tamT=i;
     fclose(arqA);
     fclose(arqB);
     ordenarVetFCrec(vetorT, tamT);
@@ -79,7 +97,7 @@ int criarArqC(char nomeArqA[], char nomeArqB[]){
 
     if(arqC){
         for(i=0;i<tamT;i++){
-            fprintf(arqC, "%f", vetorT[i]);
+            fprintf(arqC, "%f\n", vetorT[i]);
         }
         printf("Arquivo criado com sucesso!");
         fclose(arqC);
