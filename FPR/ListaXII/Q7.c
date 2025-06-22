@@ -22,6 +22,7 @@ void ordenarVetFCrec(float vet[], int tamVet){
     float num;
     for(i=0;i<tamVet; i++){
         float menor=FLT_MAX;
+        iM=i;
         for(j=i;j<tamVet;j++){
             num=vet[j];
             if(num<menor){
@@ -29,8 +30,11 @@ void ordenarVetFCrec(float vet[], int tamVet){
                 iM=j;
             }
         }
-        vet[iM]=vet[i];
-        vet[i]=menor;
+        if (iM != i) { // Otimização: só troca se for diferente
+            float temp = vet[i];
+            vet[i] = vet[iM];
+            vet[iM] = temp;
+        }
     }
 }
 
@@ -44,8 +48,10 @@ int contArq(char nomeArq[]){
     if(arq)
     {
         for(cont=0;fscanf(arq, "%f", &num) !=EOF;cont++);
+        fclose(arq);
         return cont;
     } else{
+        printf("Não foi ppossível abrir o arquivo!");
         return -1;
     }
 }
