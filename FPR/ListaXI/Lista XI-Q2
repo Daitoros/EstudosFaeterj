@@ -37,7 +37,7 @@ int funcao2(TFunc funcs[], int tamF, TData d1, TData d2){
     int i;
     for(i=0;i<tamF;i++){
         if(((funcs[i].data.mes>d1.mes)||((funcs[i].data.mes==d1.mes)&& (funcs[i].data.dia>d1.dia))) && ((funcs[i].data.mes<d2.mes)||((funcs[i].data.mes==d2.mes)&& (funcs[i].data.dia<d2.dia)))){
-            printf("%s", &funcs[i].Nome);
+            printf("%s", funcs[i].Nome);
         }
     }
 }

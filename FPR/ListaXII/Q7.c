@@ -94,7 +94,7 @@ int criarArqC(char nomeArqA[], char nomeArqB[]){
     arqC=fopen("ArqC.txt", "w");
 
     if(arqC){
-        for(i=0;i<tamT;i++){
+        for(i=0;i<tamB;i++){
             if(acharIgual(vetorA, vetorB[i], tamA)){
                 fprintf(arqC, "%f\n", vetorB[i]);
             }
