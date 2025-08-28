@@ -11,7 +11,10 @@ public class ImPar {
         int num1= scanner.nextInt();
 
         if(num1%2==0){
-            
+            System.out.print("Par!");
+        } else{
+            System.out.print("Impar!");
         }
+        scanner.close();
     }
 }
