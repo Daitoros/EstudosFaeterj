@@ -23,7 +23,7 @@ public class Media {
             float num3= scanner.nextFloat();
             float novaMedia= (num1+num2)+num3*2;
             novaMedia/=4;
-            if((edia>=7){
+            if((novaMedia>=7){
                 System.out.print("Aprovado");            
             }else{
                 System.out.print("Reprovado");            
