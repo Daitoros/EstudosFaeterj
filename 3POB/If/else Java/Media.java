@@ -21,8 +21,9 @@ public class Media {
         }else{
             System.out.print("Digite a terceira nota:");
             float num3= scanner.nextFloat();
-            media+=num3*2;
-            if((media/=3)>=7){
+            float novaMedia= (num1+num2)+num3*2;
+            novaMedia/=4;
+            if((edia>=7){
                 System.out.print("Aprovado");            
             }else{
                 System.out.print("Reprovado");            
