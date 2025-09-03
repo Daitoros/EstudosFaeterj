@@ -1,8 +1,8 @@
-package 3POB.exercicios1;
+//package 3POB.exercicios1;
 
 import java.util.Scanner;
 
-public class soma {
+public class Soma {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 

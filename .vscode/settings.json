@@ -3,5 +3,6 @@
         "lista xi-q2": "c",
         "listaxi-q3": "c",
         "limits.h": "c"
-    }
+    },
+    "java.debug.settings.onBuildFailureProceed": true
 }
