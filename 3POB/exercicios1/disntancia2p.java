@@ -22,8 +22,8 @@ public class disntancia2p {
         formula=formula*formula;
         float formula2=y2-y1;
         formula2=formula2*formula2;
-        float formula3=formula+formula2;
-        formula3= sqrt(formula3);
+        double formula3=formula+formula2;
+        formula3= Math.sqrt(formula3);
         
         System.out.print(formula3);
         scanner.close();
