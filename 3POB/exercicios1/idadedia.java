@@ -5,12 +5,15 @@ package 3POB.exercicios1;
 import java.util.Scanner;
 
 public class idadedia {
-    Scanner scanner= new Scanner(System.in);
+    public static void main(String[] args) {
+        Scanner scanner= new Scanner(System.in);
 
-    System.out.print("Informe quantos anos você tem: ");
-    int idade= scanner.nextInt();
+        System.out.print("Informe quantos anos você tem: ");
+        int idade= scanner.nextInt();
 
-    idade*=365;
-    System.out.print(idade);
-    scanner.close();
+        idade=idade*365;
+        System.out.print(idade);
+        scanner.close();
+    }
+    
 }

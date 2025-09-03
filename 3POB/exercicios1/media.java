@@ -7,19 +7,19 @@ import java.util.Scanner;
 
 public class media {
     public static void main(String[] args) {
-         Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
-    System.out.print("Informe o valor 1: ");
-    float num1= sc.nextFloat();
-    System.out.print("Informe o valor 2: ");
-    float num2= sc.nextFloat();
-    System.out.print("Informe o valor 3: ");
-    float num3= sc.nextFloat();
+        System.out.print("Informe o valor 1: ");
+        float num1= sc.nextFloat();
+        System.out.print("Informe o valor 2: ");
+        float num2= sc.nextFloat();
+        System.out.print("Informe o valor 3: ");
+        float num3= sc.nextFloat();
 
-    float media=num1+num2+num3;
+        float media=num1+num2+num3;
 
-    media/=3;
-    System.out.print(media);
-    sc.close()
+        media/=3;
+        System.out.print(media);
+        sc.close()
     }
 }
