@@ -1,4 +1,4 @@
-package 3POB.exercicios1;
+// package 3POB.exercicios1;
 
 import java.util.Scanner;
 
