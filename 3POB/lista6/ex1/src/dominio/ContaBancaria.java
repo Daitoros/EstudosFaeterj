@@ -10,6 +10,9 @@ public class ContaBancaria {
     public double getSaldo() {
         return this.saldo;
     }
+    public void setTitular(String titular){
+        this.Titular = titular;
+    }
     public void Depositar(double valor){
         double Saldo = getSaldo();
         setSaldo(Saldo + valor);
